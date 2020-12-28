@@ -13,17 +13,17 @@ const ClientList = (props) => {
 
   const filter = (item) => {
     const has_admin = !item.has_admin;
-    const newItem = {
-      ...item,
-      has_admin,
-    };
-    // eslint-disable-next-line no-use-before-define
-    const listaClientesAntiga = clientes.filter(
-      (cliente) => cliente.name !== item.name
-    );
-
-    const clientes = [...listaClientesAntiga, newItem];
-    setClients(clientes);
+    
+    setClients(clientes.map((cliente) => {
+        if (item === cliente) {
+          return {
+            ...item,
+            has_admin
+          }
+        }
+        return cliente
+      }
+    ));
   }
 
   return (

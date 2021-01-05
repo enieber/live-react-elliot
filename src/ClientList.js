@@ -5,10 +5,15 @@ import listaClientes from './listClients.json'
 
 const ClientList = (props) => {
   const [clientes, setClients] = useState([]);
-
+  const [isLoading, setLogind] = useState(false)
+  
   useEffect(() => {
-    const clienteToSet = listaClientes.data;
-    setClients(clienteToSet);
+    setLoading(true)
+    setTimeout(() => {
+      const clienteToSet = listaClientes.data;
+      setClients(clienteToSet);
+      setLoading(false)
+    }, 2000);
   }, []);
 
   const filter = (item) => {
@@ -26,6 +31,12 @@ const ClientList = (props) => {
     ));
   }
 
+  if (isLoading) {
+    return (
+      <div>carregando..</div>
+    )
+  }
+  
   return (
     <div>
       <h2>lista de clientes</h2>
